@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<script 
+    src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js">
+</script>
+<script>
+    var win = $(window);
+    var doc = $(document);
+    var counter = 1;
+    var maxNumberOfElement = 200;
+
+    /* print number to 50 px longer then the window height */
+    function initial(){
+        console.log(
+            "Document height: "+doc.height(), 
+            "Window Height: "+win.height()
+        );
+        while(
+            doc.height() <= win.height()+50 && 
+            counter < maxNumberOfElement
+        ){
+            addNewElement();
+        }
+    }
+
+    /* add a new nubmer */
+    function addNewElement(){
+        $("body").append("<br/>"+counter++);
+        console.log("adding: "+counter);
+    }    
+
+    /* when user scroll */
+    $(window).scroll(function(){
+        console.log(
+            "Window Scroll Top: "+win.scrollTop(), 
+            "Document Height: " + doc.height(), 
+            "Window Height: "+win.height()
+        );
+        if(
+            win.scrollTop() == doc.height() - win.height() && 
+            counter <= maxNumberOfElement
+        ){
+          addNewElement();
+        }
+    });
+</script>
+</head>
+<body>
+    <p>This page will add new number when scroll down until 200.</p>
+<script>
+    initial();
+</script>
+</body>
+</html>
